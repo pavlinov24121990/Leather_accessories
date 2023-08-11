@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
-  resources :category do
-    resources :product
+  devise_for :users
+  namespace :admin do
+    resources :categorys do
+      resources :products
+    end
   end
+  resources :categorys do
+      resources :products
+    end
   root "products#index"
 end
