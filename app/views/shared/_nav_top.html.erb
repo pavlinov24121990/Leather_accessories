@@ -4,6 +4,9 @@
       <ul class="nav w-100 col-12 col-lg-auto me-lg-auto mb-2 justify-content-around mb-md-0 text-white"">
         <% if user_signed_in? %>
           <li>
+            <%= image_tag current_user.avatar, size: "50x50" %>
+          </li>
+          <li>
             <h3> <%= current_user.full_name %> </h3>
           </li>
         <% end %>

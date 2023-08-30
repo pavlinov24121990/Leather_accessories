@@ -11,12 +11,12 @@
         <%= f.text_field :title, class: "form-control", placeholder: "Title" %>
       </div>
 
-      <div data-controller="form-add-product">
+      <div data-controller="form-add-product form-add-images">
         <%= f.fields_for :products do |p| %>
           <div data-form-add-product-target='container'>
           </div>
         <% end %>
-        <button data-action="click->form-add-product#add" class="btn btn-success" type="button">Add product</button>
+        <button data-action="click->form-add-product#add" class="btn btn-success mb-3" type="button">Add product</button>
       </div>
       
       <div class="field mb-3">
