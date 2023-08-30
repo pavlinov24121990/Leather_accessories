@@ -1,0 +1,31 @@
+<button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    Create category and product
+</button>
+<div class="collapse mb-3" id="collapseExample">
+  <div class="card card-body">
+    <div id="errors">
+    </div>
+    <%= form_with model: [:admin, category] do |f| %>
+      <div class="mb-3">
+        <%= f.label :Title_Category, class: "form-label", style: "text-transform: capitalize" %>
+        <%= f.text_field :title, class: "form-control", placeholder: "Title" %>
+      </div>
+
+      <div data-controller="form-add-product">
+        <%= f.fields_for :products do |p| %>
+          <div data-form-add-product-target='container'>
+          </div>
+        <% end %>
+        <button data-action="click->form-add-product#add" class="btn btn-success" type="button">Add product</button>
+      </div>
+      
+      <div class="field mb-3">
+        <%= f.submit "Create category and product", class: "btn btn-primary" %>   
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
+
+

@@ -1,0 +1,38 @@
+<button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExampleProduct" aria-expanded="false" aria-controls="collapseExample">
+    Create product in category
+</button>
+<div class="collapse mb-3" id="collapseExampleProduct">
+  <div class="card card-body">
+    <div id="errors_product">
+    </div>
+    <%= form_with model: [:admin, product] do |f| %>
+      <div class="mb-3">
+        <%= f.label :title, class: "form-label", style: "text-transform: capitalize" %>
+        <%= f.text_field :title, class: "form-control", placeholder: "Title" %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :description, class: "form-label", style: "text-transform: capitalize" %>
+        <%= f.text_field :description, class: "form-control", placeholder: "Title" %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :price, class: "form-label", style: "text-transform: capitalize" %>
+        <%= f.text_field :price, class: "form-control", placeholder: "Title" %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :category_id, class: "form-label", style: "text-transform: capitalize" %>
+        <%= f.collection_select :category_id, Category.all, :id, :title, { prompt: "Select category" }, class: "form-control" %>
+      </div>
+      
+      <div class="field mb-3">
+        <%= f.submit "Create product in category", class: "btn btn-primary" %>   
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
+
+

@@ -4,30 +4,11 @@
       <li>
         <%= link_to 'Home', root_path, class: "nav-link px-2 text-white"%>
       </li>
-      <li>
-        <%= link_to 'Bags', root_path, class: "nav-link px-2 text-white"%>
-      </li>
-      <li>
-        <%= link_to 'Bananas', root_path, class: "nav-link px-2 text-white"%>
-      </li>
-      <li>
-        <%= link_to 'Clips', root_path, class: "nav-link px-2 text-white"%>
-      </li>
-      <li>
-        <%= link_to 'Purses', root_path, class: "nav-link px-2 text-white"%>
-      </li>
-      <li>
-        <%= link_to 'Slings', root_path, class: "nav-link px-2 text-white"%>
-      </li>
-      <li>
-        <%= link_to 'Wallet', root_path, class: "nav-link px-2 text-white"%>
-      </li>
-      <li>
-        <%= link_to 'Feedback', root_path, class: "nav-link px-2 text-white"%>
-      </li>
-      <li>
-        <%= link_to 'About us', root_path, class: "nav-link px-2 text-white"%>
-      </li>
+      <% Category.all.each do |category| %>
+        <li>
+          <%= link_to category.title, category_path(category), class: "nav-link px-2 text-white"%>
+        </li>
+      <% end %>
     </ul>
   </nav>
 </div>     

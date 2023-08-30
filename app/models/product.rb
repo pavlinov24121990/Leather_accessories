@@ -1,3 +1,9 @@
 class Product < ApplicationRecord
+  
   belongs_to :category
+  
+  validates :title, presence: true, length: { minimum: 2, maximum: 20 }
+  validates :description, presence: true, length: { minimum: 5, maximum: 100 }
+  validates :price, format: { with: /\A\d+\.\d{0,2}\z/, message: "should be in the format 00.00" },
+                   numericality: { greater_than_or_equal_to: 0 }
 end
