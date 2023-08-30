@@ -28,7 +28,7 @@ module Admin
     private
 
     def category_params
-      params.require(:category).permit(:title, products_attributes: [:title, :description, :price])
+      params.require(:category).permit(:title, products_attributes: [:title, :description, :price, images: []])
     end
 
   end

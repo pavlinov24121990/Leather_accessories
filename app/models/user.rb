@@ -9,6 +9,8 @@ class User < ApplicationRecord
 
   enum role: %i[user admin]
 
+  has_one_attached :avatar
+
   def full_name
     "#{name} #{surname}"
   end

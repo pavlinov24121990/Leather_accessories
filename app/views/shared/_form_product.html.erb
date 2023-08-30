@@ -22,6 +22,17 @@
       </div>
 
       <div class="mb-3">
+        <%= f.label :Foto_Products, class: "form-label", style: "text-transform: capitalize" %>
+        <%= f.file_field :images, class: "form-control" %>
+      </div>
+
+      <div data-controller="form-add-images">
+        <div data-form-add-images-target='images'>
+        </div>
+        <button data-action="click->form-add-images#add" class="btn btn-success mb-3" type="button">Add Images</button> </br>
+      </div>
+
+      <div class="mb-3">
         <%= f.label :category_id, class: "form-label", style: "text-transform: capitalize" %>
         <%= f.collection_select :category_id, Category.all, :id, :title, { prompt: "Select category" }, class: "form-control" %>
       </div>
