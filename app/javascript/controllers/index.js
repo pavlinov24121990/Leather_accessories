@@ -4,5 +4,11 @@
 
 import { application } from "./application"
 
-import HelloController from "./hello_controller"
-application.register("hello", HelloController)
+import FormAddProductController from "./form_add_product_controller"
+application.register("form-add-product", FormAddProductController)
+
+import FormRemoveProductController from "./form_remove_product_controller"
+application.register("form-remove-product", FormRemoveProductController)
+
+import FormResetController from "./form_reset_controller"
+application.register("form-reset", FormResetController)
