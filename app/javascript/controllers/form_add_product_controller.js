@@ -8,7 +8,7 @@ export default class extends Controller {
     event.preventDefault();
     const time = new Date().getTime();
     const content = `
-      <div class="mb-3" data-controller="form-remove-product">
+      <div class="mb-3" data-controller="form-remove-product" data-time="${time}">
         <label class="form-label" for="category_products_attributes_${time}_title">Title</label>
         <input class="form-control" type="text" name="category[products_attributes][${time}][title]" id="category_products_attributes_${time}_title" placeholder="Title">
         
@@ -21,7 +21,7 @@ export default class extends Controller {
         <label class="form-label" for="category_products_attributes_${time}_images">Images</label>
         <input class="form-control mb-3" type="file" name="category[products_attributes][${time}][images]" id="category_products_attributes_${time}_images">
         
-        <div data-form-add-images-target='images'>
+        <div id="images_${time}">
         </div>
 
         <button data-action="click->form-add-images#add" class="btn btn-success mb-3" type="button">Add Images</button> </br>
