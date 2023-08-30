@@ -1,13 +1,11 @@
 module Admin
 
   class ProductsController < AdminController
-
-    def index
-    end
                               
     def create
       @product = Product.new(product_params)
       if @product.save
+        @product = Product.new
         flash[:success] = 'Create product in category!'
         respond_to do |format|
           format.turbo_stream do
