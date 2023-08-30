@@ -15,6 +15,3 @@ application.register("form-remove-images", FormRemoveImagesController)
 
 import FormRemoveProductController from "./form_remove_product_controller"
 application.register("form-remove-product", FormRemoveProductController)
-
-import FormResetController from "./form_reset_controller"
-application.register("form-reset", FormResetController)
