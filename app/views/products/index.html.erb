@@ -1,0 +1,20 @@
+<div>
+  <ul>
+    <% @products.each do |product| %>
+      <li>
+        <% product.images.each do |image| %>
+          <%= image_tag image, size: "100x100" %>
+        <% end %>
+        <h4>
+          <%= product.title %>
+        </h4>
+        <p>
+          <%= product.description %>
+        </p>
+        <h5>
+          <%= product.price %>
+        </h5>
+      </li>
+    <% end %>
+  </ul>
+</div>

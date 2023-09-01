@@ -23,14 +23,11 @@
 
       <div class="mb-3">
         <%= f.label :Foto_Products, class: "form-label", style: "text-transform: capitalize" %>
-        <%= f.file_field :images, class: "form-control" %>
+        <%= f.file_field :images, class:"form-control mb-3", multiple: true, accept: "image/*", data: { controller: "form-add-images" }, id: "image_files", name: "product[images][]" %>
       </div>
 
-      <div data-controller="form-add-images">
-        <div data-form-add-images-target='images'>
+        <div id="preview" data-controller="form-add-images" class="d-flex flex-row">
         </div>
-        <button data-action="click->form-add-images#add" class="btn btn-success mb-3" type="button">Add Images</button> </br>
-      </div>
 
       <div class="mb-3">
         <%= f.label :category_id, class: "form-label", style: "text-transform: capitalize" %>
