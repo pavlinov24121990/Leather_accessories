@@ -2,10 +2,18 @@ module Admin
 
   class CategoriesController < AdminController
 
+    include Pagy::Backend
+
+    before_action :category_find, only: %i[show]
+
     def index
       @category = Category.new
       @category.products.build
       @product = Product.new
+    end
+
+    def show
+      @pagy, @products = pagy(@category.products.order(created_at: :asc), items: 6)
     end
                               
     def create
@@ -29,6 +37,10 @@ module Admin
 
     def category_params
       params.require(:category).permit(:title, products_attributes: [:title, :description, :price, images: []])
+    end
+
+    def category_find
+      @category = Category.find(params[:id])
     end
 
   end

@@ -1,6 +1,12 @@
 module Admin
 
   class ProductsController < AdminController
+
+    include Pagy::Backend
+
+    def index
+      @pagy, @products = pagy(Product.order(created_at: :asc), items: 6)
+    end
                               
     def create
       @product = Product.new(product_params)
