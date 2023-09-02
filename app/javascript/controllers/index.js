@@ -10,8 +10,5 @@ application.register("form-add-images", FormAddImagesController)
 import FormAddProductController from "./form_add_product_controller"
 application.register("form-add-product", FormAddProductController)
 
-import FormRemoveImagesController from "./form_remove_images_controller"
-application.register("form-remove-images", FormRemoveImagesController)
-
 import FormRemoveProductController from "./form_remove_product_controller"
 application.register("form-remove-product", FormRemoveProductController)

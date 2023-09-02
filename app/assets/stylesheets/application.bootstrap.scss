@@ -17,3 +17,15 @@
   top: 0px;
   right: 0px;
 }
+
+.custom-list-style {
+  list-style: none;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  span {
+    margin-right: 5px;
+  }
+}

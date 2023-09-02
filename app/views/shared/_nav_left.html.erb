@@ -1,6 +1,16 @@
-<div class="p-3 col-2 vh-100 d-flex flex-column">
+<div class="col-2 vh-100 d-flex flex-column">
   <nav class="h-100 w-100 rounded-pill bg-dark">
     <ul class="h-100 d-flex flex-column align-items-center nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-around mb-md-0">
+    <% if current_user.admin? %>
+    <li>
+      <%= link_to 'Home', admin_products_path, class: "nav-link px-2 text-white"%>
+    </li>
+    <% Category.all.each do |category| %>
+      <li>
+        <%= link_to category.title, admin_category_path(category), class: "nav-link px-2 text-white"%>
+      </li>
+    <% end %>
+    <% else %>
       <li>
         <%= link_to 'Home', root_path, class: "nav-link px-2 text-white"%>
       </li>
@@ -9,6 +19,7 @@
           <%= link_to category.title, category_path(category), class: "nav-link px-2 text-white"%>
         </li>
       <% end %>
+    <% end %>
     </ul>
   </nav>
 </div>     
