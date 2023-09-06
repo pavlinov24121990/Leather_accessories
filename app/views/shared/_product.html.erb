@@ -1,0 +1,24 @@
+<div class="p-3 me-1 d-flex flex-column justify-content-center align-items-center border rounded border-dark">
+  <div id="flash" class="mb-5">
+  </div>
+  <div class="d-flex flex-row justify-content-center align-items-center">
+    <% product.images.each do |image| %>
+      <%= image_tag image, size: "370x470", class: "p-3" %>
+    <% end %>
+  </div>
+  <h4 class="mt-3">
+    <%= product.title %>
+  </h4>
+    <p class="mb-3 text-break">
+      <%= product.description %>
+    </p>
+  <h5>
+    Price: <%= product.price %>
+  </h5>
+  <% if current_user&.admin? %>
+    <div id="Update_Product_in_Category_form" class="mb-3">
+      <%= render 'shared/form_product', product: product, buttonupdate: buttonupdate%>
+    </div>
+    <%= link_to "Product deleted", admin_product_path, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
+  <% end %>
+</div>

@@ -1,5 +1,9 @@
 <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExampleProduct" aria-expanded="false" aria-controls="collapseExample">
+  <% if buttonupdate %>
+    Update product in category
+  <% else %>
     Create product in category
+  <% end %>
 </button>
 <div class="collapse mb-3" id="collapseExampleProduct">
   <div class="card card-body">
@@ -35,7 +39,7 @@
       </div>
       
       <div class="field mb-3">
-        <%= f.submit "Create product in category", class: "btn btn-primary" %>   
+        <%= f.submit (buttonupdate ? "Update product in category" : "Create product in category"), class: "btn btn-primary" %>   
       </div>
     <% end %>
   </div>
