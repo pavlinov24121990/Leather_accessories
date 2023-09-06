@@ -5,14 +5,14 @@
   <div class="card card-body">
     <div id="errors">
     </div>
-    <%= form_with model: [:admin, category] do |f| %>
+    <%= form_with model: [:admin, category], multipart: true do |f| %>
       <div class="mb-3">
         <%= f.label :Title_Category, class: "form-label", style: "text-transform: capitalize" %>
         <%= f.text_field :title, class: "form-control", placeholder: "Title" %>
       </div>
 
-      <div data-controller="form-add-product form-add-images">
-        <%= f.fields_for :products do |p| %>
+      <div data-controller="form-add-product">
+        <%= f.fields_for :products do |p|  %>
           <div data-form-add-product-target='container'>
           </div>
         <% end %>

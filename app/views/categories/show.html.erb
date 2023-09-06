@@ -1,9 +1,11 @@
 <div>
-  <ul class="row">
+  <ul class="row mw-100">
     <% @products.in_groups_of(3, false).each do |row| %>
       <% row.compact.each do |product| %>
         <% collapse_id = "collapse_#{product.id}" %>
-        <li class="col-md-4 mb-3 custom-list-style">
+        <% product_count = row.compact.size %>
+        <% col_width = product_count < 3 ? "col-md-#{12 / product_count}" : "col-md-4" %>
+        <li class="<%= col_width %> mw-100 mb-3 custom-list-style">
           <div class="pt-3 me-1 d-flex flex-column justify-content-center align-items-center border rounded border-dark">
             <%= image_tag product.images.first, size: "170x270" %>
             <h4 class="mt-3">
@@ -14,7 +16,7 @@
                 <%= truncate(product.description, length: 10) %>
               </p>
             </button>
-            <div class="collapse mb-3 p-2 mw-100" id="<%= collapse_id %>">
+            <div class="collapse mb-3 p-2" id="<%= collapse_id %>">
               <p class="mb-3 text-break">
                 <%= product.description %>
               </p>

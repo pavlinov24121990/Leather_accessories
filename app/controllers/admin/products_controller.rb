@@ -2,12 +2,16 @@ module Admin
 
   class ProductsController < AdminController
 
+    include Pagy::Backend
+
     def index
+      @pagy, @products = pagy(Product.order(created_at: :asc), items: 6)
     end
                               
     def create
       @product = Product.new(product_params)
       if @product.save
+        @product = Product.new
         flash[:success] = 'Create product in category!'
         respond_to do |format|
           format.turbo_stream do
