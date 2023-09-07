@@ -11,6 +11,8 @@ class User < ApplicationRecord
 
   has_one_attached :avatar
 
+  has_one :cart
+
   def full_name
     "#{name} #{surname}"
   end
