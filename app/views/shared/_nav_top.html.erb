@@ -23,10 +23,13 @@
             <%= link_to "Log in", new_user_session_path, class: "nav-link px-2 text-white" %>
           <% end %>
         </li>
+          <li>
+            <%= link_to "Cart", user_signed_in? ? cart_path(current_user.cart) : new_user_session_path, class: "nav-link px-2 text-white" %>
+          </li>
         <% if current_user&.admin? %>
-        <li>
-          <%= link_to "Admin panel", admin_categories_path, class: "nav-link px-2 text-white" %>
-        </li>
+          <li>
+            <%= link_to "Admin panel", admin_categories_path, class: "nav-link px-2 text-white" %>
+          </li>
       <% end %>
       </ul>
     </nav>
