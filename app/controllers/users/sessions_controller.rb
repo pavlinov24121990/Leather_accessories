@@ -12,9 +12,6 @@ class Users::SessionsController < Devise::SessionsController
       sign_in(resource_name, resource)
       yield resource if block_given?
       redirect_to after_sign_in_path_for(resource)
-      unless current_user.cart
-        current_user.create_cart
-      end
     else
       flash[:success] = 'Invalid email or password.'
       respond_to do |format|
@@ -26,7 +23,6 @@ class Users::SessionsController < Devise::SessionsController
   end
 
   def destroy
-      current_user.cart.destroy
     super
   end
 

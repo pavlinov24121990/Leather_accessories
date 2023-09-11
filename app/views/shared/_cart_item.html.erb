@@ -1,0 +1,32 @@
+<div id="cart_items">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Total</th>
+        <th>Image</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% cart.cart_items.each do |cart_item| %>
+        <tr>
+          <td><%= cart_item.product.title %></td>
+          <td><%= cart_item.quantity %></td>
+          <td><%= number_to_currency(cart_item.product.price) %></td>
+          <td><%= number_to_currency(cart_item.total_price) %></td>
+          <td><%= image_tag cart_item.product.images.first, size: "50x50" %></td>
+          <td>
+            <%= link_to "Remove", cart_item_path(cart_item), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <div class="text-center">
+    <strong>Total: <%= number_to_currency(@cart.total_price) %></strong>
+  </div>
+</div>
