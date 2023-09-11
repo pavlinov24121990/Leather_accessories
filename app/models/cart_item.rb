@@ -4,4 +4,8 @@ class CartItem < ApplicationRecord
 
   validates :quantity, presence: true, numericality: { in: 1..5 }
 
+  def total_price
+    product.price * quantity
+  end
+
 end

@@ -13,8 +13,13 @@
       <%= product.description %>
     </p>
   <h5>
-    Price: <%= product.price %>
+    Price: <%= number_to_currency(product.price) %>
   </h5>
+  <%= form_with(model: CartItem.new, url: cart_items_path(product_id: product.id), method: :post) do |form| %>
+    <%= form.number_field :quantity, value: 1, min: 1, max: 5 %>
+    <%= form.hidden_field :product_id, value: product.id %>
+    <%= form.submit "Buy product", class: "btn btn-primary mb-3" %>
+  <% end %>
   <% if current_user&.admin? %>
     <div id="Update_Product_in_Category_form" class="mb-3">
       <%= render 'shared/form_product', product: product, buttonupdate: buttonupdate%>
