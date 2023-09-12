@@ -12,6 +12,7 @@ class User < ApplicationRecord
   has_one_attached :avatar
 
   has_one :cart
+  has_many :orders, dependent: :destroy
 
   def full_name
     "#{name} #{surname}"
