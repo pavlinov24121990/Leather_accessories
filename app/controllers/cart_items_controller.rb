@@ -13,8 +13,9 @@ class CartItemsController < ApplicationController
       new_quantity = cart_item_params[:quantity].to_i
       if new_quantity > cart_item.quantity
         cart_item.update(quantity: new_quantity)
+      else
+        cart_item.update(quantity: cart_item.quantity + cart_item_params[:quantity].to_i)
       end
-      cart_item.update(quantity: cart_item.quantity + cart_item_params[:quantity].to_i)
       redirect_to cart_path(current_user.cart)
     else
       current_user.cart.cart_items.create(cart_item_params)
