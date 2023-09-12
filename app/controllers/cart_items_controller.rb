@@ -2,7 +2,7 @@ class CartItemsController < ApplicationController
 
   before_action :authenticate_user!
   before_action :set_product, only: %i[create] 
-  before_action :set_cart_item, only: %i[destroy] 
+  before_action :set_cart_item, only: %i[destroy update] 
   
   def create
     unless current_user.cart
@@ -10,6 +10,19 @@ class CartItemsController < ApplicationController
     end
       current_user.cart.cart_items.create(cart_item_params)
       redirect_to cart_path(current_user.cart)
+  end
+
+  def update
+    if @cart_item.update(cart_item_params)
+      @cart = current_user.cart 
+      respond_to do |format|
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.update(:cart_items, partial: "shared/cart_item", locals: { cart: @cart }) 
+        end
+      end
+    else
+        render turbo_stream: turbo_stream.update(:errors_cart_items, partial: "shared/errors", status: :unprocessable_entity, locals: { object: @cart_item })
+    end
   end
 
   def destroy
