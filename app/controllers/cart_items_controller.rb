@@ -16,10 +16,13 @@ class CartItemsController < ApplicationController
       else
         cart_item.update(quantity: cart_item.quantity + cart_item_params[:quantity].to_i)
       end
-      redirect_to cart_path(current_user.cart)
     else
       current_user.cart.cart_items.create(cart_item_params)
-      redirect_to cart_path(current_user.cart)
+      respond_to do |format|
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.update(:cart_items_count, partial: "shared/cart_items_count") 
+        end
+      end
     end
   end
 

@@ -20,6 +20,7 @@
             <%= form_with(model: cart_item, url: cart_item_path(cart_item), method: :patch, id: "cart_items_form", data: { controller: 'cart-items-quantity', action: 'change->cart-items-quantity#handleFormChange' }) do |form| %>
               <%= form.number_field :quantity, value: cart_item.quantity , min: 1, max: 5, data: { 'cart-items-quantity-target': 'quantity' } %>
             <% end %>
+          </td>
           <td><%= number_to_currency(cart_item.product.price) %></td>
           <td><%= number_to_currency(cart_item.total_price) %></td>
           <td><%= image_tag cart_item.product.images.first, size: "50x50" %></td>

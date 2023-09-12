@@ -1,0 +1,21 @@
+<div class="d-flex flex-column justify-content-start align-items-center">
+  <h1>Order Details</h1>
+  <div class="row">
+    <% @orders.each_slice(1) do |orders| %>
+      <div class="d-flex flex-column justify-content-start align-items-center col-md-6">
+        <ul>
+          <% orders.each do |order| %>
+            <li class="mb-3 custom-list-style"><p><strong>Order Number:</strong> <%= order.id %></p></li>
+            <li class="mb-3 custom-list-style"><p><strong>Status:</strong> <%= order.status.humanize %></p></li>
+            <li class="mb-3 custom-list-style"><p><strong>Name User:</strong> <%= order.user.full_name %></p></li>
+            <li class="mb-3 custom-list-style"><p><strong>Address:</strong> <%= order.address %></p></li>
+            <li class="mb-3 custom-list-style"><p><strong>Phone Number:</strong> <%= order.phone_number %></p></li>
+            <li class="mb-3 custom-list-style"><p><strong>Delivery Date:</strong> <%= (order.updated_at + 5.days).strftime("%d-%m-%Y") %></p></li>
+            <li class="mb-5 custom-list-style"><%= link_to "Order Details", order_path(order), class: "btn btn-primary" %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </div>
+  <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
+</div>
