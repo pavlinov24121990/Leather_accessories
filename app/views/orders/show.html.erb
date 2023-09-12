@@ -2,7 +2,7 @@
   <h1>Order Details</h1>
 
   <p><strong>Order Number:</strong> <%= @order.id %></p>
-  <p><strong>Status:</strong> <%= @order.status %></p>
+  <p><strong>Status:</strong> <%= @order.status.humanize %></p>
   <p><strong>Name User:</strong> <%= @order.user.full_name %></p>
   <p><strong>Address:</strong> <%= @order.address %></p>
   <p><strong>Phone Number:</strong> <%= @order.phone_number %></p>

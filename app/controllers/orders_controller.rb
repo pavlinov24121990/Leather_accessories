@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
 
-  before_action :cart_find, only: %i[create]
+  before_action :cart_find, only: %i[create new]
   before_action :order_find, only: %i[show destroy]
 
   include Pagy::Backend
@@ -37,7 +37,6 @@ class OrdersController < ApplicationController
 
   def new
     @order = current_user.orders.build
-    @cart = current_user.cart 
   end
  
   private

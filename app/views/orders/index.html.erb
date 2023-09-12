@@ -6,7 +6,7 @@
         <ul>
           <% orders.each do |order| %>
             <li class="mb-3 custom-list-style"><p><strong>Order Number:</strong> <%= order.id %></p></li>
-            <li class="mb-3 custom-list-style"><p><strong>Status:</strong> <%= order.status %></p></li>
+            <li class="mb-3 custom-list-style"><p><strong>Status:</strong> <%= order.status.humanize %></p></li>
             <li class="mb-3 custom-list-style"><p><strong>Name User:</strong> <%= order.user.full_name %></p></li>
             <li class="mb-3 custom-list-style"><p><strong>Address:</strong> <%= order.address %></p></li>
             <li class="mb-3 custom-list-style"><p><strong>Phone Number:</strong> <%= order.phone_number %></p></li>

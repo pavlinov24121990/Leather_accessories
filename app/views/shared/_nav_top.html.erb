@@ -38,11 +38,11 @@
             <%= link_to "Admin panel", admin_categories_path, class: "nav-link px-2 text-white" %>
           </li>
         <% end %>
-        <% if current_user&.cart&.orders %>
+        <% if current_user&.orders %>
           <li>
             <%= link_to "Order", orders_path, class: "nav-link px-2 text-white" %>
             <span>
-              <%= current_user.cart.orders.count %>
+              <%= current_user.orders.count %>
             </span>
           </li>
         <% end %>
