@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import CartItemsQuantityController from "./cart_items_quantity_controller"
+application.register("cart-items-quantity", CartItemsQuantityController)
+
 import FormAddImagesController from "./form_add_images_controller"
 application.register("form-add-images", FormAddImagesController)
 
