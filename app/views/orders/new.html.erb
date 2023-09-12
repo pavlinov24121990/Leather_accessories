@@ -2,7 +2,7 @@
 <%= render 'shared/cart_item', cart: @cart %>
 <div id="errors_order">
 </div>
-  <%= form_with model: @order  do |o| %>
+  <%= form_with model: @order do |o| %>
 
     <div class="mb-3">
       <%= o.hidden_field :status %>

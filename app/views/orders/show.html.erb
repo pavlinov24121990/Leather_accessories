@@ -1,13 +1,9 @@
 <div>
   <h1>Order Details</h1>
 
-  <p><strong>Order Number:</strong> <%= @order.id %></p>
-  <p><strong>Status:</strong> <%= @order.status.humanize %></p>
-  <p><strong>Name User:</strong> <%= @order.user.full_name %></p>
-  <p><strong>Address:</strong> <%= @order.address %></p>
-  <p><strong>Phone Number:</strong> <%= @order.phone_number %></p>
-  <p><strong>Delivery Date:</strong> <%= (@order.updated_at + 5.days).strftime("%d-%m-%Y") %></p>
-
+  <div id="order_details">
+    <%= render 'shared/order_details', order: @order%>
+  </div>
   <h2>Order Items</h2>
   <table class="table">
     <thead>
@@ -38,12 +34,35 @@
     <strong>Total: <%= number_to_currency(@order.cart.total_price) %></strong>
   </div>
 
-  <div class="text-center">
+  <div class="text-center mb-3">
     <%= link_to "Order Delete", order_path(@order), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
     <%= link_to "Pay for the Order", "#", class: "btn btn-primary" %>
+  </div> 
+  <div id="errors_order_details" class="mb-3">
   </div>
-  
-  
 
-  
+  <div class="text-center">
+    <% if current_user.admin? %>
+      <%= form_with model: @order do |o| %>
+        <div class="mb-3">
+          <%= o.label :status, class: "form-label", style: "text-transform: capitalize" %>
+          <%= o.select :status, Order.statuses.keys.map { |status| [status, status] }, {}, class: "form-select" %>
+        </div>
+
+        <div class="mb-3">
+          <%= o.label :address, class: "form-label", style: "text-transform: capitalize" %>
+          <%= o.text_field :address, class: "form-control", placeholder: "Address" %>
+        </div>
+
+        <div class="mb-3">
+          <%= o.label :phone_number, class: "form-label", style: "text-transform: capitalize" %>
+          <%= o.text_field :phone_number, class: "form-control", placeholder: "Phone Number" %>
+        </div>
+
+        <div class="field mb-3">
+          <%= o.submit "Buy order", class: "btn btn-primary" %>   
+        </div>
+      <% end %>
+    <% end %>
+  </div>
 </div>

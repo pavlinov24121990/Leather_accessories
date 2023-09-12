@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
 
   before_action :cart_find, only: %i[create new]
-  before_action :order_find, only: %i[show destroy]
+  before_action :order_find, only: %i[show destroy update]
 
   include Pagy::Backend
 
@@ -31,8 +31,25 @@ class OrdersController < ApplicationController
   def show
   end
 
+  def update
+    if @order.update(order_params)
+      respond_to do |format|
+        format.turbo_stream do
+          render turbo_stream: [turbo_stream.update(:order_details, partial: "shared/order_details", status: :unprocessable_entity, locals: { order: @order }), 
+                                turbo_stream.update(:errors_order_details, partial: "shared/errors", status: :unprocessable_entity, locals: { object: @order })]
+        end
+      end
+    else
+      render turbo_stream: turbo_stream.update(:errors_order_details, partial: "shared/errors", status: :unprocessable_entity, locals: { object: @order })
+    end
+  end
+
   def index
-    @pagy, @orders = pagy(current_user.orders.order(created_at: :asc), items: 4)
+    if current_user.admin?
+      @pagy, @orders = pagy(Order.all.order(created_at: :desc), items: 4)
+    else
+      @pagy, @orders = pagy(current_user.orders.order(created_at: :desc), items: 4)
+    end
   end
 
   def new
