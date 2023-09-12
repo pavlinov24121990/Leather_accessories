@@ -1,0 +1,49 @@
+<div>
+  <h1>Order Details</h1>
+
+  <p><strong>Order Number:</strong> <%= @order.id %></p>
+  <p><strong>Status:</strong> <%= @order.status %></p>
+  <p><strong>Name User:</strong> <%= @order.user.full_name %></p>
+  <p><strong>Address:</strong> <%= @order.address %></p>
+  <p><strong>Phone Number:</strong> <%= @order.phone_number %></p>
+  <p><strong>Delivery Date:</strong> <%= (@order.updated_at + 5.days).strftime("%d-%m-%Y") %></p>
+
+  <h2>Order Items</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Total</th>
+        <th>Image</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @order.cart.cart_items.order(:id).each do |cart_item| %>
+        <tr>
+          <td><%= cart_item.product.title %></td>
+          <td><%= cart_item.quantity %></td>
+          <td><%= cart_item.product.description %></td>
+          <td><%= number_to_currency(cart_item.product.price) %></td>
+          <td><%= number_to_currency(cart_item.total_price) %></td>
+          <td><%= image_tag cart_item.product.images.first, size: "50x50" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <div class="text-center mb-5">
+    <strong>Total: <%= number_to_currency(@order.cart.total_price) %></strong>
+  </div>
+
+  <div class="text-center">
+    <%= link_to "Order Delete", order_path(@order), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
+    <%= link_to "Pay for the Order", "#", class: "btn btn-primary" %>
+  </div>
+  
+  
+
+  
+</div>

@@ -1,0 +1,26 @@
+<div class="card card-body">
+<%= render 'shared/cart_item', cart: @cart %>
+<div id="errors_order">
+</div>
+  <%= form_with model: @order  do |o| %>
+
+    <div class="mb-3">
+      <%= o.hidden_field :status, value: 'Pending'  %>
+    </div>
+
+    <div class="mb-3">
+        <%= o.label :address, class: "form-label", style: "text-transform: capitalize" %>
+        <%= o.text_field :address, class: "form-control", placeholder: "Address" %>
+      </div>
+
+      <div class="mb-3">
+        <%= o.label :phone_number, class: "form-label", style: "text-transform: capitalize" %>
+        <%= o.text_field :phone_number, class: "form-control", placeholder: "Phone Number" %>
+      </div>
+
+    <div class="field mb-3">
+      <%= o.submit "Buy order", class: "btn btn-primary" %>   
+    </div>
+  <% end %>
+
+</div>

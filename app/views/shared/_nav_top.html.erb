@@ -28,7 +28,7 @@
           <li>
             <%= link_to "Cart", current_user&.cart ? cart_path(current_user.cart) : new_user_session_path, class: "nav-link px-2 text-white"%>
             <% if current_user&.cart&.cart_items %>
-              <span>
+              <span id="cart_items_count">
                 <%= current_user.cart.cart_items.count %>
               </span>
             <% end %>
@@ -37,7 +37,15 @@
           <li>
             <%= link_to "Admin panel", admin_categories_path, class: "nav-link px-2 text-white" %>
           </li>
-      <% end %>
+        <% end %>
+        <% if current_user&.cart&.orders %>
+          <li>
+            <%= link_to "Order", orders_path, class: "nav-link px-2 text-white" %>
+            <span>
+              <%= current_user.cart.orders.count %>
+            </span>
+          </li>
+        <% end %>
       </ul>
     </nav>
   </div>
