@@ -1,4 +1,4 @@
-<div>
+<div id="results">
   <ul class="row">
     <% @products.in_groups_of(3, false).each do |row| %>
       <% row.compact.each do |product| %>
@@ -24,7 +24,7 @@
             <h5>
               Price: <%= number_to_currency(product.price) %>
             </h5>
-            <%= render 'shared/form_ quantity', product: product%>
+            <%= render 'shared/form_quantity', product: product%>
           </div>
         </li>
       <% end %>

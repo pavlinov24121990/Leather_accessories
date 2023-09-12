@@ -13,7 +13,11 @@
           </li>
         <% end %>
         <li>
-          <h3> Search </h3>
+          <%= form_tag(products_path, method: :get, data: { controller: 'search-product-name', action: 'change->search-product-name#handleInputChange' }) do %>
+            <div class="form-group">
+              <%= text_field_tag :search, params[:search], data: { 'search_product_name_target': 'search' }, class: "form-control", placeholder: "Search by product name" %>
+            </div>
+          <% end %>
         </li>
         <li>
           <% if user_signed_in? %>
