@@ -27,26 +27,21 @@
           <% end %>
         </li>
           <li>
-            <%= link_to "Cart", current_user&.cart ? cart_path(current_user.cart) : new_user_session_path, class: "nav-link px-2 text-white"%>
-            <% if current_user&.cart&.cart_items %>
-              <span id="cart_items_count">
-                <%= current_user.cart.cart_items.count %>
-              </span>
-            <% end %>
+            <span id="link_for_show_cart">
+              <%= render 'shared/link_for_show_cart'%>
+            </span>
           </li>
         <% if current_user&.admin? %>
           <li>
             <%= link_to "Admin panel", admin_categories_path, class: "nav-link px-2 text-white" %>
           </li>
         <% end %>
-        <% if current_user&.orders %>
           <li>
             <%= link_to "Order", orders_path, class: "nav-link px-2 text-white" %>
             <span>
-              <%= current_user&.admin? ? Order.all.count : current_user.orders.count %>
+              <%= current_user&.orders&.count %>
             </span>
           </li>
-        <% end %>
       </ul>
     </nav>
   </div>

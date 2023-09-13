@@ -1,11 +1,14 @@
-<div class="d-flex flex-column justify-content-start align-items-end">
+<div class="d-flex flex-column justify-content-start align-items-center">
   <div id="flash" class="mb-5">
   </div>
   <div id="Create_Category_and_Product" class="mb-5">
     <%= render 'shared/form_category_product', category: @category %>
   </div>
-  <div id="Create_Product_in_Category">
+  <div id="Create_Product_in_Category" class="mb-5">
     <%= render 'shared/form_product', product: @product, buttonupdate: @buttonupdate%>
+  </div>
+  <div>
+    <%= link_to "Show Order for all User: #{Order.all.count}", admin_orders_path, class: "btn btn-primary" %>
   </div>
 </div>
 

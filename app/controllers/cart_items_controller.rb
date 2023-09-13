@@ -20,7 +20,7 @@ class CartItemsController < ApplicationController
       current_user.cart.cart_items.create(cart_item_params)
       respond_to do |format|
         format.turbo_stream do
-          render turbo_stream: turbo_stream.update(:cart_items_count, partial: "shared/cart_items_count") 
+          render turbo_stream: turbo_stream.update(:link_for_show_cart, partial: "shared/link_for_show_cart")
         end
       end
     end
@@ -44,7 +44,8 @@ class CartItemsController < ApplicationController
       @cart = current_user.cart 
       respond_to do |format|
         format.turbo_stream do
-          render turbo_stream: turbo_stream.update(:cart_items, partial: "shared/cart_item", locals: { cart: @cart }) 
+          render turbo_stream: [turbo_stream.update(:cart_items, partial: "shared/cart_item", locals: { cart: @cart }),
+                                turbo_stream.update(:link_for_show_cart, partial: "shared/link_for_show_cart")] 
         end
       end
     end
