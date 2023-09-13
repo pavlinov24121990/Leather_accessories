@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :products
     resources :categories
+    resources :orders, only: %i[index create show new update destroy]
   end
 
   resources :categories
@@ -13,7 +14,6 @@ Rails.application.routes.draw do
   resources :carts
   resources :cart_items, only: %i[create update destroy]
   resources :orders, only: %i[index create show new update destroy]
-  resources :order_items
 
   root "products#index"
 end
