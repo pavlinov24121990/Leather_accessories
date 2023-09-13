@@ -13,11 +13,12 @@
           </li>
         <% end %>
         <li>
-          <h3> Search </h3>
+          <%= form_tag(products_path, method: :get, data: { controller: 'search-product-name', action: 'change->search-product-name#handleInputChange' }) do %>
+            <div class="form-group">
+              <%= text_field_tag :search, params[:search], data: { 'search_product_name_target': 'search' }, class: "form-control", placeholder: "Search by product name" %>
+            </div>
+          <% end %>
         </li>
-        <% if flash[:deleted].present? %>
-         <h3 class="mb-md-5 text-danger"> <%= flash[:deleted] %> </h3>
-        <% end %>
         <li>
           <% if user_signed_in? %>
             <%= link_to "Log out", destroy_user_session_path, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "nav-link px-2 text-white" %>
@@ -42,7 +43,7 @@
           <li>
             <%= link_to "Order", orders_path, class: "nav-link px-2 text-white" %>
             <span>
-              <%= current_user.orders.count %>
+              <%= current_user&.admin? ? Order.all.count : current_user.orders.count %>
             </span>
           </li>
         <% end %>

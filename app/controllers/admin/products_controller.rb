@@ -17,7 +17,6 @@ module Admin
     def destroy
       if @product.destroy
         redirect_to admin_products_path
-        flash[:deleted] = 'Product deleted'
       else
         render :show, status: :unprocessable_entity
       end

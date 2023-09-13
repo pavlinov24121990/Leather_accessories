@@ -15,3 +15,6 @@ application.register("form-add-product", FormAddProductController)
 
 import FormRemoveProductController from "./form_remove_product_controller"
 application.register("form-remove-product", FormRemoveProductController)
+
+import SearchProductNameController from "./search_product_name_controller"
+application.register("search-product-name", SearchProductNameController)
