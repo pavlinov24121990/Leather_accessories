@@ -1,13 +1,12 @@
 class OrdersController < ApplicationController
 
-  before_action :cart_items_find, :cart_find, only: %i[new create]
+  before_action :cart_find, :cart_items_find, only: %i[new create]
   before_action :order_find, only: %i[show]
 
   include Pagy::Backend
 
   def create
     @order = current_user.orders.new(order_with_items_params)
-    @order.user = current_user
     if @order.save
       @cart.cart_items.destroy_all
       redirect_to order_path(@order)
@@ -52,7 +51,7 @@ class OrdersController < ApplicationController
     end
 
     def cart_items_find
-      @cart_items = current_user.cart.cart_items
+      @cart_items = @cart.cart_items
     end
 
     def order_find

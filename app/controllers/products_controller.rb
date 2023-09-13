@@ -3,7 +3,6 @@ class ProductsController < ApplicationController
   include Pagy::Backend
 
   before_action :product_find, only: %i[show]
-  before_action :products, only: %i[index]
   
 
   def index

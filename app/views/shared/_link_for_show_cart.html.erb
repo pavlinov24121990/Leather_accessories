@@ -1,1 +1,2 @@
 <%= link_to "Cart", current_user&.cart ? cart_path(current_user.cart) : new_user_session_path, class: "nav-link px-2 text-white"%>
+<%= current_user&.cart&.cart_items&.count.to_i %>
