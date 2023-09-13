@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
 
+  before_action :cart_items_find, only: %i[create new]
   before_action :cart_find, only: %i[create new]
   before_action :order_find, only: %i[show destroy update]
 
@@ -8,16 +9,25 @@ class OrdersController < ApplicationController
   def create
     @order = @cart.orders.new(order_params)
     @order.user = current_user
-      if @order.save
+    if @order.save
+      @cart_items.each do |cart_item|
+        order_item = OrderItem.new(
+          order: @order,
+          product: cart_item.product,
+          quantity: cart_item.quantity,
+          price: cart_item.product.price
+        )
+        order_item.save
         @cart.cart_items.destroy_all
-        redirect_to order_path(@order)
-      else
-        respond_to do |format|
-          format.turbo_stream do
-            render turbo_stream: turbo_stream.update(:errors_order, partial: "shared/errors", status: :unprocessable_entity, locals: { object: @order }) 
-          end
+      end
+      redirect_to order_path(@order)
+    else
+      respond_to do |format|
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.update(:errors_order, partial: "shared/errors", status: :unprocessable_entity, locals: { object: @order }) 
         end
       end
+    end
   end
 
   def destroy
@@ -64,6 +74,10 @@ class OrdersController < ApplicationController
 
     def cart_find
       @cart = current_user.cart
+    end
+
+    def cart_items_find
+      @cart_items = current_user.cart.cart_items
     end
 
     def order_find

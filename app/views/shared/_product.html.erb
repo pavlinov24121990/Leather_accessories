@@ -15,7 +15,7 @@
   <h5>
     Price: <%= number_to_currency(product.price) %>
   </h5>
-  <%= render 'shared/form_ quantity', product: product%>
+  <%= render 'shared/form_quantity', product: product%>
   <% if current_user&.admin? %>
     <div id="Update_Product_in_Category_form" class="mb-3">
       <%= render 'shared/form_product', product: product, buttonupdate: buttonupdate%>

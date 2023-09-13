@@ -19,10 +19,15 @@ class Order < ApplicationRecord
 
   after_initialize :set_default_status, if: :new_record?
 
+  def price_order_items
+    order_items.sum { |order_item| order_item.total_price }
+  end
+
   private
 
   def set_default_status
     self.status ||= 'Pending'
   end
+  
 
 end

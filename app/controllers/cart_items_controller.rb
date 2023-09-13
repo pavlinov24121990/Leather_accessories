@@ -44,7 +44,8 @@ class CartItemsController < ApplicationController
       @cart = current_user.cart 
       respond_to do |format|
         format.turbo_stream do
-          render turbo_stream: turbo_stream.update(:cart_items, partial: "shared/cart_item", locals: { cart: @cart }) 
+          render turbo_stream: [turbo_stream.update(:cart_items, partial: "shared/cart_item", locals: { cart: @cart }),
+                                turbo_stream.update(:cart_items_count, partial: "shared/cart_items_count")] 
         end
       end
     end

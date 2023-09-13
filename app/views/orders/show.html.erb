@@ -17,21 +17,21 @@
       </tr>
     </thead>
     <tbody>
-      <% @order.cart.cart_items.order(:id).each do |cart_item| %>
+      <% @order.order_items.order(:id).each do |order_item| %>
         <tr>
-          <td><%= cart_item.product.title %></td>
-          <td><%= cart_item.quantity %></td>
-          <td><%= cart_item.product.description %></td>
-          <td><%= number_to_currency(cart_item.product.price) %></td>
-          <td><%= number_to_currency(cart_item.total_price) %></td>
-          <td><%= image_tag cart_item.product.images.first, size: "50x50" %></td>
+          <td><%= order_item.product.title %></td>
+          <td><%= order_item.quantity %></td>
+          <td><%= order_item.product.description %></td>
+          <td><%= number_to_currency(order_item.product.price) %></td>
+          <td><%= number_to_currency(order_item.total_price) %></td>
+          <td><%= image_tag order_item.product.images.first, size: "50x50" %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
 
   <div class="text-center mb-5">
-    <strong>Total: <%= number_to_currency(@order.cart.total_price) %></strong>
+    <strong>Total: <%= number_to_currency(@order.price_order_items) %></strong>
   </div>
 
   <div class="text-center mb-3">
