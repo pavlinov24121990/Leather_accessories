@@ -2,6 +2,7 @@ class Order < ApplicationRecord
 
   belongs_to :user
   belongs_to :cart
+  has_many :order_items, dependent: :destroy
 
   validates :status, presence: true
   validates :address, length: { minimum: 2, maximum: 30 }
