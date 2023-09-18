@@ -20,6 +20,7 @@ class OrdersController < ApplicationController
   end
 
   def show
+    @liqpay_request = params_payment
   end
 
   def index
@@ -32,9 +33,22 @@ class OrdersController < ApplicationController
  
   private
 
+    def params_payment
+      @liqpay_request = Liqpay::Request.new({
+      amount: @order.price_order_items,
+      currency: 'UAH',
+      order_id: @order.id,
+      description: "Оплата заказа ##{@order.id}",
+      result_url: "http://127.0.0.1:3000/liqpay_payment_for_callback",
+      server_url: "http://127.0.0.1:3000/liqpay_payment_for_result",
+      action: "pay",
+      version: "3"
+    })
+  end
+
     def cart_items_params
       @cart_items.map do |cart_item|
-      { product: cart_item.product, quantity: cart_item.quantity, price: cart_item.product.price }
+      { product: cart_item.product, quantity: cart_item.quantity, price: cart_item.product.price.round(2) }
       end
     end
 

@@ -36,9 +36,23 @@
 
   <div class="text-center mb-3">
     <% if current_user.admin? %>
-      <%= link_to "Order Delete", order_path(order), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
+      <%= link_to "Order Delete", admin_order_path(order), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
     <% end %>
-    <%= link_to "Pay for the Order", "#", class: "btn btn-primary" %>
+  </div> 
+  <div class="text-center mb-3">
+    <%= form_tag liqpay_payment_for_email_path, method: :post do %>
+      <%= hidden_field_tag :amount, order.price_order_items %>
+      <%= hidden_field_tag :description, "Оплата заказа ##{order.id}" %>
+      <%= hidden_field_tag :order_id, order.id %>
+      <%= hidden_field_tag :currency, "UAH" %>
+      <%= hidden_field_tag :action, "pay" %>
+      <%= hidden_field_tag :version, "3" %>
+
+      <%= submit_tag "Send invoice by email № #{order.id}", class: "btn btn-primary" %>
+    <% end %>
+  </div> 
+  <div class="text-center mb-3">
+    <%=liqpay_button @liqpay_request, title: "Pay for Order"%>
   </div> 
   <div id="errors_order_details" class="mb-3">
   </div>

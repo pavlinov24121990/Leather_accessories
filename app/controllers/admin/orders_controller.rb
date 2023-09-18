@@ -19,6 +19,7 @@ module Admin
     end
 
     def show
+      @liqpay_request = params_payment
     end
 
     def update
@@ -35,6 +36,27 @@ module Admin
     end
 
     private
+
+    def params_payment
+      @liqpay_request = Liqpay::Request.new(
+  amount: '999.99',
+  currency: 'UAH',
+  order_id: '123',
+  description: 'Some Product',
+  result_url: products_path,
+  server_url: liqpay_payment_for_result_path
+)
+      # liqpay = Liqpay.new
+      # liqpay.cnb_form({
+      #   action:      "pay",
+      #   amount:      @order.price_order_items,
+      #   currency:    "UAH",
+      #   description: "Оплата заказа ##{@order.id}",
+      #   order_id:    @order.id,
+      #   version:     "3",
+      #   result_url: "http://127.0.0.1:3000/"
+      # })
+    end
     
     def order_params
       params.require(:order).permit(:status, :address, :phone_number)

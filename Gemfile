@@ -82,3 +82,5 @@ gem "aws-sdk-s3", require: false
 
 gem 'pagy'
 
+gem 'liqpay', '~>2.0.0'
+
